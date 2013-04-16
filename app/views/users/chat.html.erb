@@ -1,0 +1,13 @@
+<p align="right"> <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></p>
+
+
+<h4 class="subheading">Chat with Friends</h4> <br /><br />
+
+<%= form_tag friend_path do %>
+    <li>
+    <%= select_tag "list[]", options_from_collection_for_select(@userview, "id", "email"), :multiple=>false %>
+    </li>
+    <br /><br />
+  <% end %>
+
+  <p class="button"><%= submit_tag "Start Chat", :action => 'chatwindow' , :onclick=>"window.open(this.href,'create_company', 'height=400, width=600,left=200,top=200');return false;" %></p> <br />

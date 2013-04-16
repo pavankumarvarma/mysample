@@ -1,0 +1,19 @@
+
+<div class="hero-unit">
+
+
+<h4 class="subheading">Log in</h4><br>
+
+<%= form_tag sessions_path do %>
+ <p align="left">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email] %>
+ </p>
+ <p align="left">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </p>
+  <p class="button"><%= submit_tag "Log in" %></p> <br />
+  <p> New user? Please register <%= link_to "here", sign_up_path %></p>
+<% end %>
+</div>

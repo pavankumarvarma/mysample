@@ -1,0 +1,44 @@
+
+<p align="right"> <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></p>
+<table>
+<tr>
+<td width="60%">	
+<% if !@userview.blank? %>
+
+<h4 class="subheading">Add Friends</h4> <br /><br />
+
+<%= form_tag friend_path do %>
+<% for task in @userview %>
+    <li>
+     <h5 class="badge"> <%= check_box_tag "friends[]", task.id %> <%= task.email %></h5>
+
+    </li>
+    
+  <% end %>
+
+  <p class="button"><%= submit_tag "Add" %></p> <br />
+  
+
+  <% end %><br /> <br />
+
+  <% end %>
+</td>
+<td width="40%">
+ 
+<% if !@showfriends.blank? %>
+
+<h4 class="subheading">Added Friends</h4> 
+<div class="badge">
+  <% @showfriends.each do |b| %>
+      
+      
+        <h5><%= b.email %></h5>
+           
+      
+      
+    <% end %>
+    </div>
+    <% end %>
+</td>
+</tr>
+</table>

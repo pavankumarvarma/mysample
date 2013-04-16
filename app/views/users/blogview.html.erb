@@ -1,0 +1,34 @@
+
+
+<p align="right"> <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></p>
+<table>
+ <tr>
+ <td width="70%" class="hero-unit"> 
+<div align="left">
+<h4 class="subheading">My Posts</h4>
+      <% @blogview.each do |b| %>
+      
+      <div class="badge">
+        <h5><%= b.title %></h5>
+        <p><%= b.post %><p>
+    
+      </div>
+    <% end %>
+</div>    
+</td>
+<td width="30%" class="hero-unit" align="top">
+<div>
+<h4 class="subheading">Friends Messages</h4>
+      <% @myfriends.each do |b| %>
+      
+      <div border="1">
+        <h5><%= link_to  b.email  , friendsblog_view_path(:user_id => b.id), 
+:onclick=>"window.open(this.href,'create_company', 'height=400, width=600,left=200,top=200');return false;" %>'s Messages
+</h5>
+      </div>
+    <% end %>
+
+</div>
+</td>
+</tr>
+</table>

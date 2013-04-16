@@ -1,0 +1,12 @@
+
+<%= stylesheet_link_tag "bootstrap.css" %>
+<h4 class="subheading">Posts</h4>
+      <% @fblogview.each do |b| %>
+      
+      <div class="badge1">
+        <h5><%= b.title %></h5>
+        <p><%= b.post %><p>
+    
+      </div>
+    <% end %>
+

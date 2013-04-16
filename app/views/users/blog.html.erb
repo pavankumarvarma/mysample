@@ -1,0 +1,21 @@
+
+<p align="right"> <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></p>
+<div class="hero-unit">
+
+
+<h3>POST YOUR COMMENTS</h3>
+
+<%= form_tag blog_create_path do %>
+ <p align="left">
+    <%= label_tag :title %>
+    <%= text_field_tag :title, params[:title] %>
+ </p>
+ <p align="left">
+    <%= label_tag :post %>
+     <%= text_area_tag :post %>
+  </p>
+  <p class="button"><%= submit_tag "Post Blog" %></p>
+
+
+<% end %>
+</div>
