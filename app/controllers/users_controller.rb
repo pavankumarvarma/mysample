@@ -42,13 +42,47 @@ class UsersController < ApplicationController
    def chat
     checkuser
    
-       @userview=User.find_by_sql ["select * from Users where  id <>?",session[:user_id]]
+       @userview=User.find_by_sql ["select * from Users where  id <>? and id in (select friendid from friends where userid=?)",session[:user_id],session[:user_id]]
 
    end
 
-   def chatwindow
+   def get_new_messages
+    @chatid =params[:chatid]
+    @chatdisplay = Chatlog.find_by_sql ["select (select email from users where id=a.userid) as email,a.message from chatlogs a where chatid=? order by id desc",@chatid]
+    render :json => @chatdisplay.to_json
+   end
 
-      #render :layout => false
+   def chatwindow
+      c = Chat.new
+
+      @chatid= Chat.find_by_sql ["select id from Chats where  (userid =? and friendid=?) or (userid =? and friendid=?)",session[:user_id],params[:friendid],params[:friendid],session[:user_id]]
+      
+      @chatdisplay = Chatlog.find_by_sql ["select (select email from users where id=a.userid) as email,a.message from chatlogs a where chatid=? order by id desc",@chatid]
+
+      if @chatid.blank?
+        c.userid=session[:user_id]
+        c.friendid= params[:friendid]
+        c.save
+      end
+      render :layout => false
+   end
+
+   def chatlog
+      c = Chatlog.new
+      @chat = Chat.find_by_sql ["select id from Chats where  (userid =? and friendid=?) or (userid =? and friendid=?)",session[:user_id],params[:friendid],params[:friendid],session[:user_id]]
+       @chat.each do |b|
+        @chatid = b.id
+       end
+
+      c.chatid=@chatid
+      c.userid=session[:user_id]
+      c.message=params[:message]
+      c.status='N'
+      c.save
+
+      redirect_to chatwindow_path(:friendid=> params[:friendid])
+      
+      
    end
 
    def showfriends

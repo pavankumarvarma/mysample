@@ -4,6 +4,8 @@ Mysample::Application.routes.draw do
 
  # get "users/new"
 
+ match "/" => "sessions#new"
+
 get "log_out" => "sessions#destroy", :as => "log_out"
 get "log_in" => "sessions#new", :as => "log_in"
 get "sign_up" => "users#new", :as => "sign_up"
@@ -15,7 +17,7 @@ get "blog_view" => "users#blogview", :as => "blog_view"
 get "home" => "users#blogview", :as => "home"
 get "friendsblog_view" => "users#friendsblogview", :as => "friendsblog_view"
 
-get "chatwindow" => "users#chatwindow", :as => "chatwindow"
+get "chatwindow" => "users#chatwindow#:userid", :as => "chatwindow"
 
 get "user_add" => "users#addusers", :as => "user_add"
 
@@ -26,6 +28,11 @@ get "showfriend" => "users#showfriends", :as => "showfriend"
 get "myfriend" => "users#myfriends", :as => "myfriend"
 
 get "chat" => "users#chat", :as => "chat"
+
+get "chatlog" => "users#chatlog", :as => "chatlog"
+post "chatlog" => "users#chatlog", :as => "chatlog"
+
+get "get_new_messages" => "users#get_new_messages", :as => "get_new_messages" 
 
 # root :to => "users#new"
 resources :users

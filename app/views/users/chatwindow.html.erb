@@ -1,12 +1,77 @@
+<head>
+  <title>Chat</title>
+  <%= stylesheet_link_tag "bootstrap.css" %>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
 
-<h4 class="subheading">Posts</h4>
-     
-      <table>
+<script type="text/javascript">
+
+function load()
+{
+setTimeout("refresh()", 1000)
+}
+function refresh(){
+//window.location.reload()
+//load()
+
+// Make Ajax call ; get result and add to Div
+$.getJSON('get_new_messages?chatid=24', function(response){
+  // [{"email":"ramaraju","message":"hi"},{"email":"pavan","message":"ok "},{"email":"ramaraju","message":"hi"}]
+  var html_message = ""
+  $(response).each(function(){
+    html_message += "<p>"+this.email + " : " + this.message +"</p>" 
+    
+  });
+$('.topbar').html(html_message)
+
+});
+
+load();
+}
+</script>
+<style>
+.topbar{
+    display:block;
+    width:290px;
+    height:370px;
+    background-color:#475;
+    overflow:scroll
+
+    }
+</style>
+</head>
+<body onload="load()">
+
+<div class="badge1">
+
+      <table height="500px">
       	<tr>
-      		<td></td>
+      		<td><div class="topbar" height="500px">
+
+            
+
+  <% @chatdisplay.each do |b| %>
+      
+      <p><%= b.email %> : <%= b.message %><p>
+   <% end %> 
+      </div>
+    
+
+
+            </div></td>
       	</tr>
       	<tr>
-      		<td> <%= text_area_tag :post %></td>
+      		<td>
+           <%= form_tag(chatlog_path(:friendid => params[:friendid]) , :remote => true) do %>
+   
+           <%= text_area_tag :message, params[:message] %> 
+            <%= submit_tag "SEND", :class => "btn btn-primary" %>
+
+            <% end %>
+
+           </td>
       	</tr>
-      </table		
+      </table>
+     </div> 		
+
+     </body>
       

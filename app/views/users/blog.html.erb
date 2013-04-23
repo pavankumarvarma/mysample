@@ -1,5 +1,5 @@
 
-<p align="right"> <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></p>
+
 <div class="hero-unit">
 
 
@@ -8,13 +8,13 @@
 <%= form_tag blog_create_path do %>
  <p align="left">
     <%= label_tag :title %>
-    <%= text_field_tag :title, params[:title] %>
+    <%= text_field_tag :title, params[:title], :class => 'input-small span2' %>
  </p>
  <p align="left">
     <%= label_tag :post %>
      <%= text_area_tag :post %>
   </p>
-  <p class="button"><%= submit_tag "Post Blog" %></p>
+  <p class="button"><%= submit_tag "Post Blog", :class => "btn btn-primary" %></p>
 
 
 <% end %>

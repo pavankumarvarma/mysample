@@ -9,13 +9,23 @@
 <body>
 <div id="user_nav" class="dd" align="center">
 <p class="heading"><img src="/assets/parabola-logo.png">Community and Messaging System</p>
+
 </div>
 <div class="breadcrumb">
-<%= yield %>
+  
+  <% if current_user %>
+  <h6 align="right"><i class="icon-home icon-white"></i> <%= link_to "HOME", blog_view_path %> || <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></h6>
+ <% else %>
+  <%= link_to "Sign up", sign_up_path %> or
+    <%= link_to "log in", log_in_path %>
+  <% end %>
+  <%= yield %>
 </div>
 <div id="user_nav" class="navbar-fixed-top">
   <% if current_user %>
-    <h5 class="subheading1">Logged in as <%= current_user.email %>.
+
+
+    <h5 class="subheading1" style="position:relative;">Logged in as <%= current_user.email %>.
     <%= link_to "Log out", log_out_path %></h5>
   <% else %>
    <!-- <%= link_to "Sign up", sign_up_path %> or

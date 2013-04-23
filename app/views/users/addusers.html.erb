@@ -1,22 +1,21 @@
 
-<p align="right"> <%= link_to "ADD NEW POST", blog_path %> || <%= link_to "ADD FRIENDS", user_add_path %> || <%= link_to "CHAT", chat_path %></p>
-<table>
+<table class="table table-hover">
 <tr>
 <td width="60%">	
 <% if !@userview.blank? %>
 
-<h4 class="subheading">Add Friends</h4> <br /><br />
+<h4 class="subheading">Add Friends</h4> 
 
 <%= form_tag friend_path do %>
 <% for task in @userview %>
-    <li>
-     <h5 class="badge"> <%= check_box_tag "friends[]", task.id %> <%= task.email %></h5>
+    <li class="active">
+     <h5 > <%= check_box_tag "friends[]", task.id %> <%= task.email %></h5>
 
     </li>
     
   <% end %>
 
-  <p class="button"><%= submit_tag "Add" %></p> <br />
+  <p class="button"><%= submit_tag "Add", :class => "btn btn-primary" %></p> <br />
   
 
   <% end %><br /> <br />
